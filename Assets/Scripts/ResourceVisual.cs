@@ -1,21 +1,31 @@
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResourceVisual : MonoBehaviour
 {
-    private GameResource _resourceType;
-    private Text _resourceText;
-    private ResourceBank _resourceBank;
+    [SerializeField] GameResource resourceType;
+    [SerializeField] ResourceBank resourceRank;
+    [SerializeField] Text textComponent;
 
-    private void Start()
+    void Start()
     {
-        _resourceBank = FindObjectOfType<ResourceBank>();
-        UpdateResourceText();
+        resourceRank = FindObjectOfType<ResourceBank>();
+        if (resourceRank != null)
+        {
+            ObservableInt resource = resourceRank.GetResource(resourceType);
+            resource.PropertyChanged += UpdateTextEvent;
+            UpdateText(resource.Value);
+        }
     }
-
-    private void UpdateResourceText()
+    
+    void UpdateText(int value)
     {
-        int resourceValue = _resourceBank.GetResource(_resourceType);
-        _resourceText.text = resourceValue.ToString();
+        textComponent.text = $"{value}";
+    }
+    
+    void UpdateTextEvent(object sender,  PropertyChangedEventArgs e)
+    {
+        UpdateText(((ObservableInt)sender).Value);
     }
 }

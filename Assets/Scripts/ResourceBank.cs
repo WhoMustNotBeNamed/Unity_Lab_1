@@ -1,9 +1,18 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace DefaultNamespace
+public class ResourceBank : MonoBehaviour
 {
-    public class ResourceBank : MonoBehaviour
+    public Dictionary<GameResource, ObservableInt> resourceDictionary = new Dictionary<GameResource, ObservableInt>();
+    
+    public void ChangeResource(GameResource resource, int value)
     {
-        
+        resourceDictionary[resource].Value += value;
+    }
+
+    public ObservableInt GetResource(GameResource resource)
+    {
+        return resourceDictionary[resource];
     }
 }
