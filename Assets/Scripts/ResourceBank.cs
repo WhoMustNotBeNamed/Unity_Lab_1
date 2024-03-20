@@ -15,4 +15,9 @@ public class ResourceBank : MonoBehaviour
     {
         return resourceDictionary[resource];
     }
+    
+    public void ChangeRecources(GameResource resource, int value)
+    {
+        resourceDictionary[resource].Value += value;
+    }
 }
