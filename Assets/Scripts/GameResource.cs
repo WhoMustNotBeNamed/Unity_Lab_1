@@ -4,5 +4,10 @@ public enum GameResource
     Food,
     Wood,
     Stone,
-    Gold
+    Gold,
+    HumansProdLvl,
+    FoodProdLvl,
+    WoodProdLvl,
+    StoneProdLvl,
+    GoldProdLvl
 }
